@@ -1,5 +1,5 @@
 # BTLO Challenge: Paranoid — Writeup & Investigation
-[![BTLO Paranoid Badge](badge.png)](https://blueteamlabs.online/achievement/share/btlo/user/f86f73ad7d71cd6b7ae526
+[![BTLO Paranoid Badge](badge.png)](https://blueteamlabs.online/achievement/share/challenge/164988/30)
 
 Решение лабораторной работы **Paranoid** с платформы Blue Team Labs Online (BTLO). В рамках данного расследования был проведен анализ логов аудита Linux (`audit.log`) для восстановления хронологии компрометации хоста.
 
