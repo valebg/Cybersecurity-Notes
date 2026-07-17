@@ -42,17 +42,22 @@ for i in range(1, 9375):
 
 raw_numbers_str = "".join(barcode_data)
 
-print("\n[*] Декодирование завершено! Конвертируем...")
+print("\\n[*] Декодирование завершено! Конвертируем...")
 try:
     clean_text = "".join(chr(int(num)) for num in raw_numbers_str.split() if num.isdigit())
-    print("\n[+] РЕЗУЛЬТАТ:")
+    print("\\n[+] РЕЗУЛЬТАТ:")
     print(clean_text)
 except Exception as e:
     print("[-] Ошибка конвертации:", e)
-    🏁 Результат и Флаг
+```
+
+## 🏁 Результат и Флаг
 После запуска скрипт успешно собрал текст, внутри которого находился заветный ключ:
+> **This is the flag - B4rc0d3_H1570rY.**
 
-This is the flag - B4rc0d3_H1570rY.
+---
 
-🏆 Статус задания
-Нажмите на изображение выше, чтобы проверить статус выполнения на платформе Blue Team Labs Online.
+### 🏆 Статус задания
+[![Челендж пройден](solved.png)](https://blueteamlabs.online/achievement/share/challenge/164988/34)
+
+*Нажмите на изображение выше, чтобы проверить статус выполнения на платформе Blue Team Labs Online.*
