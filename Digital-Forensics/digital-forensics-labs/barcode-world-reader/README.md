@@ -49,3 +49,10 @@ for i in range(1, 9375):
 			print(clean_text)
 			except Exception as e:
 			print("[-] Ошибка конвертации:", e)
+			🏁 Результат и Флаг
+			После запуска скрипт успешно собрал текст, внутри которого находился заветный ключ:
+			
+			This is the flag - B4rc0d3_H1570rY.
+			
+			🏆 Статус задания
+			Нажмите на бейдж выше, чтобы проверить статус выполнения на платформе Blue Team Labs Online. https://blueteamlabs.online/achievement/share/challenge/164988/34
