@@ -1,4 +1,4 @@
-# Blue Team Labs / CTF Challenge: Barcode World 
+# Blue Team Labs / CTF Challenge: Barcode World
 
 Скрипт для автоматического декодирования и сборки скрытого флага из коллекции из 9 374 изображений штрих-кодов.
 
@@ -29,30 +29,30 @@ barcode_data = []
 print("[*] Запуск разбора штрих-кодов...")
 
 for i in range(1, 9375):
-	image_path = os.path.join(folder, f"{i}.png")
-	image = cv2.imread(image_path)
-	
-	if image is None:
-		continue
-		
-		decoded = decode(image)
-		for barcode in decoded:
-			chunk = barcode.data.decode("utf-8")
-			barcode_data.append(chunk)
-			
-			raw_numbers_str = "".join(barcode_data)
-			
-			print("\n[*] Декодирование завершено! Конвертируем...")
-			try:
-			clean_text = "".join(chr(int(num)) for num in raw_numbers_str.split() if num.isdigit())
-			print("\n[+] РЕЗУЛЬТАТ:")
-			print(clean_text)
-			except Exception as e:
-			print("[-] Ошибка конвертации:", e)
-			🏁 Результат и Флаг
-			После запуска скрипт успешно собрал текст, внутри которого находился заветный ключ:
-			
-			This is the flag - B4rc0d3_H1570rY.
-			
-			🏆 Статус задания
-			Нажмите на бейдж выше, чтобы проверить статус выполнения на платформе Blue Team Labs Online. https://blueteamlabs.online/achievement/share/challenge/164988/34
+    image_path = os.path.join(folder, f"{i}.png")
+    image = cv2.imread(image_path)
+    
+    if image is None:
+        continue
+        
+    decoded = decode(image)
+    for barcode in decoded:
+        chunk = barcode.data.decode("utf-8")
+        barcode_data.append(chunk)
+
+raw_numbers_str = "".join(barcode_data)
+
+print("\n[*] Декодирование завершено! Конвертируем...")
+try:
+    clean_text = "".join(chr(int(num)) for num in raw_numbers_str.split() if num.isdigit())
+    print("\n[+] РЕЗУЛЬТАТ:")
+    print(clean_text)
+except Exception as e:
+    print("[-] Ошибка конвертации:", e)
+    🏁 Результат и Флаг
+После запуска скрипт успешно собрал текст, внутри которого находился заветный ключ:
+
+This is the flag - B4rc0d3_H1570rY.
+
+🏆 Статус задания
+Нажмите на изображение выше, чтобы проверить статус выполнения на платформе Blue Team Labs Online.
