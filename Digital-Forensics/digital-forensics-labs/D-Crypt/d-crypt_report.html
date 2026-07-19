@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTLO: D-Crypt Writeup</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.25; background-color: #121212; color: #e0e0e0; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background-color: #1e1e1e; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+        h1 { color: #4caf50; border-bottom: 2px solid #4caf50; padding-bottom: 10px; }
+        h2 { color: #2196f3; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        h3 { color: #ff9800; }
+        a { color: #bb86fc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        pre { background-color: #2d2d2d; padding: 15px; border-radius: 4px; overflow-x: auto; border-left: 4px solid #2196f3; color: #f8f8f2; font-family: 'Courier New', Courier, monospace; }
+        .flag { background-color: #2e7d32; color: #ffffff; padding: 10px; font-weight: bold; border-radius: 4px; display: inline-block; font-family: monospace; font-size: 1.2em; }
+        .meta-table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 15px; }
+        .meta-table th, .meta-table td { border: 1px solid #444; padding: 10px; text-align: left; }
+        .meta-table th { background-color: #333; color: #fff; }
+        .meta-table tr:nth-child(even) { background-color: #252525; }
+        .img-container { text-align: center; margin: 20px 0; }
+        .img-container img { max-width: 100%; height: auto; border: 1px solid #444; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Blue Team Labs Online — D-Crypt Writeup</h1>
+    
+    <table class="meta-table">
+        <tr>
+            <th>Параметр</th>
+            <th>Значение</th>
+        </tr>
+        <tr>
+            <td><strong>Категория</strong></td>
+            <td>Digital Forensics / Cryptography</td>
+        </tr>
+        <tr>
+            <td><strong>Платформа</strong></td>
+            <td><a href="https://blueteamlabs.online/achievement/share/challenge/164988/20" target="_blank">Blue Team Labs Online Achievement</a></td>
+        </tr>
+        <tr>
+            <td><strong>Никнейм</strong></td>
+            <td>valebg</td>
+        </tr>
+    </table>
+
+    <h2>1. Сценарий и задача</h2>
+    <p>Спецслужбы перехватили заархивированный файл у подозреваемого в терроризме, который пытался отправить его сообщнику. Наша задача — провести глубокий анализ артефактов, восстановить скрытый контекст и извлечь финальное секретное сообщение.</p>
+
+    <div class="img-container">
+        <img src="./D_crypt.png" alt="D-Crypt Challenge Lab Image">
+    </div>
+
+    <h2>2. Ход исследования и анализ</h2>
+    
+    <h3>Шаг 1: Сбор метаданных и базовая стеганография</h3>
+    <p>Первым делом запускаем сбор метаданных через <code>exiftool</code> и проверяем файл на наличие скрытых контейнеров с помощью стандартного инструмента <code>steghide</code>:</p>
+    <pre>exiftool SBT.jpg
+steghide extract -sf SBT.jpg</pre>
+
+    <h3>Шаг 2: Извлечение скрытых данных через Strings и Unzip</h3>
+    <p>Проверяем структуру файла на наличие скрытых текстовых строк или сигнатур других файлов с помощью утилиты <code>strings</code>:</p>
+    <pre>strings SBT.jpg</pre>
+    <p>В самом конце вывода обнаруживается упоминание файла <code>message.png</code>. Пробуем распаковать файл напрямую через <code>unzip</code>:</p>
+    <pre>unzip SBT.jpg</pre>
+
+    <h3>Шаг 3: Верификация типа файла</h3>
+    <p>Проверяем реальный тип извлеченного файла с помощью команды <code>file</code>:</p>
+    <pre>file message.png</pre>
+
+    <h2>3. Многослойное декодирование (Криптография)</h2>
+    
+    <h3>Этап 1: URL Decode & ROT47</h3>
+    <p>Декодируем URL-строку и отправляем полученный шифротекст на анализ в dCode. Применяем ROT-47.</p>
+
+    <h3>Этап 2: Base32 Decode & Реверс строки</h3>
+    <p>Декодируем полученную массу через Base32. Разворачиваем полученную строку задом наперед (Reverse).</p>
+
+    <h3>Этап 3: Base64 Decode & Скрытый Whitespace</h3>
+    <p>После реверса прогоняем строку через <strong>Base64 Decode</strong> в CyberChef. На выходе получаем визуально пустой результат, состоящий исключительно из невидимых символов — пробелов (Spaces) и табуляций (Tabs).</p>
+
+    <h2>4. Извлечение флага (Whitespace Стеганография)</h2>
+    <p>Переводим невидимый Whitespace-код в бинарный вид (пробелы — 0, табуляции — 1) и конвертируем финальные байты в текст:</p>
+    
+    <div style="margin: 20px 0;">
+        <span class="flag">SBT{Y0U_AR3_4_N3rd!}</span>
+    </div>
+</div>
+
+</body>
+</html>
