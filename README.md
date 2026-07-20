@@ -1,25 +1,45 @@
 # 🛡️ Cybersecurity & Incident Response Notes
 
-Добро пожаловать в мой репозиторий с разборами практических кейсов по кибербезопасности! Здесь собраны подробные отчеты, ход расследования инцидентов и разборы тактик атакующих.
+Добро пожаловать в мой репозиторий с разборами практических кейсов по кибербезопасности! Здесь собраны подробные технические отчеты (Writeups), ход расследования инцидентов, анализ малвари и цифровой криминалистики.
 
 ---
 
-## 📊 Мои Лабораторные Работы (Blue Team Labs Online)
+## 📊 Навигатор по Лабораторным Работам & Кейсам
 
-| Платформа | Категория | Название лабораторной работы | Отчет (Writeup) | Статус |
+### 🎯 Incident Response & Security Operations
+| Платформа | Категория | Название работы | Отчет (Writeup) | Статус |
 | :--- | :--- | :--- | :--- | :--- |
-| **BTLO** | Security Operations | [Secure Shell](./Incident-Response/BTLO_Labs/Secure_Shell/) | 📝 [Читать отчет](./Incident-Response/BTLO_Labs/Secure_Shell/README.md) | ✅ 100% Complete |
-| **BTLO** | Digital Forensics / Crypto | [D-Crypt](./Incident-Response/BTLO_Labs/D-Crypt/) | 📝 [Читать отчет](./Incident-Response/BTLO_Labs/D-Crypt/README.md) | ✅ 100% Complete |
+| **BTLO** | Incident Response | [Secure Shell](./Incident-Response/BTLO_Labs/Secure_Shell/) | 📝 [Читать отчет](./Incident-Response/BTLO_Labs/Secure_Shell/README.md) | ✅ Complete |
+| **BTLO** | Incident Response | [Paranoid](./Incident-Response/BTLO_Labs/Paranoid/) | 📂 [Перейти](./Incident-Response/BTLO_Labs/Paranoid/) | 🔄 В процессе |
+
+### 🔍 Digital Forensics (Цифровая Криминалистика)
+| Платформа | Категория | Название работы | Отчет (Writeup) | Статус |
+| :--- | :--- | :--- | :--- | :--- |
+| **BTLO** | Forensics / Crypto | [D-Crypt](./Digital-Forensics/digital-forensics-labs/D-Crypt/) | 📝 [Читать отчет](./Digital-Forensics/digital-forensics-labs/D-Crypt/README.md) | ✅ Complete |
+| **BTLO** | Steganography | [Squid Game Steg](./Digital-Forensics/digital-forensics-labs/squid-game-steg/) | 📂 [Перейти](./Digital-Forensics/digital-forensics-labs/squid-game-steg/) | 🔄 В процессе |
+| **BTLO** | Log Analysis | [Compromised WordPress](./Digital-Forensics/digital-forensics-labs/Log_Analysis-Compromised_WordPress/) | 📂 [Перейти](./Digital-Forensics/digital-forensics-labs/Log_Analysis-Compromised_WordPress/) | 🔄 В процессе |
+| **BTLO** | Malware Analysis | [Suspicious USB](./Digital-Forensics/digital-forensics-labs/Malware_Analysis-Suspicious_USB/) | 📂 [Перейти](./Digital-Forensics/digital-forensics-labs/Malware_Analysis-Suspicious_USB/) | 🔄 В процессе |
+| **BTLO** | Forensics Tools | [Barcode World Reader](./Digital-Forensics/digital-forensics-labs/barcode-world-reader/) | 📂 [Перейти](./Digital-Forensics/digital-forensics-labs/barcode-world-reader/) | 🔄 В процессе |
+
+### ⚙️ Reverse Engineering (Реверс-Инжиниринг)
+| Платформа | Категория | Название работы | Отчет (Writeup) | Статус |
+| :--- | :--- | :--- | :--- | :--- |
+| **BTLO** | Code Injection | [Injection Series Part 3](./Reverse-Engineering/BTLO_Injection3/) | 📝 [Markdown](./Reverse-Engineering/BTLO_Injection3/README.md) / 📄 [PDF Report](./Reverse-Engineering/BTLO_Injection3/Malware_Analysis_BTLO_Injection3.pdf) | ✅ Complete |
+
+### 📚 Базовые разделы и теория
+* 🧠 **[Threat Intelligence](./Threat-Intelligence/README.md)** — Исследование киберугроз и тактик APT.
+* 🛡️ **[Security Operations](./Security-Operations/README.md)** — Мониторинг и реагирование.
+* 🐧 **[Linux & Network Basics](./Linux-and-Network-Basics/README.md)** — Фундаментальные конспекты по сетям и администрированию Linux.
 
 ---
 
-## 🛠️ Навыки и инструменты, использованные в лабах
-* **Сбор артефактов и логов:** Анализ SSH-логов (`sshd.log`), работа с утилитами командной строки Linux (`grep`, `strings`, `head`, `file`).
-* **Стеганография:** Работа с утилитой `steghide`, извлечение скрытых контейнеров из изображений, Whitespace-стеганография.
-* **Криптография:** Многослойное декодирование данных (CyberChef, URL Decode, ROT47, Base32, Base64, бинарный код).
+## 🛠️ Навыки и инструменты (Практический опыт)
+* **Анализ логов & Веб-криминалистика:** Анализ SSH-логов (`sshd.log`), аудит скомпрометированного WordPress.
+* **Реверс-инжиниринг & Малварь:** Анализ инъекций кода (Code Injection), исследование вредоносных USB-накопителей.
+* **Стеганография & Криптография:** Работа с `steghide`, декодирование Whitespace, CyberChef (ROT47, Base32/64).
 
 ---
 
-## 🔗 Полезные ссылки
-* **Мой профиль на BTLO:** [Валерий на Blue Team Labs Online](https://blueteamlabs.online/public/user/f86f73ad7d71cd6b7ae526)
-* **Связь со мной:** [LinkedIn Profile](https://www.linkedin.com/in/valerii-botlung)
+## 🔗 Контакты
+* **Профиль на BTLO:** [Валерий на Blue Team Labs Online](https://blueteamlabs.online/public/user/f86f73ad7d71cd6b7ae526)
+* **Связь:** [LinkedIn Profile](https://www.linkedin.com/in/valerii-botlung)
