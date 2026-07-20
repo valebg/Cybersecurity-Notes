@@ -10,16 +10,16 @@
 | Платформа | Категория | Название работы | Отчет (Writeup) | Статус |
 | :--- | :--- | :--- | :--- | :--- |
 | **BTLO** | Incident Response | [Secure Shell](./Incident-Response/BTLO_Labs/Secure_Shell/) | 📝 [Читать отчет](./Incident-Response/BTLO_Labs/Secure_Shell/README.md) | ✅ Complete |
-| **BTLO** | Incident Response | [Paranoid](./Incident-Response/BTLO_Labs/Paranoid/) | 📂 [Перейти](./Incident-Response/BTLO_Labs/Paranoid/) | 🔄 В процессе |
+| **BTLO** | Incident Response | [Paranoid](./Incident-Response/BTLO_Labs/Paranoid/) | 📂 [Перейти к материалам](./Incident-Response/BTLO_Labs/Paranoid/) | ✅ Complete |
 
 ### 🔍 Digital Forensics (Цифровая Криминалистика)
 | Платформа | Категория | Название работы | Отчет (Writeup) | Статус |
 | :--- | :--- | :--- | :--- | :--- |
 | **BTLO** | Forensics / Crypto | [D-Crypt](./Digital-Forensics/digital-forensics-labs/D-Crypt/) | 📝 [Читать отчет](./Digital-Forensics/digital-forensics-labs/D-Crypt/README.md) | ✅ Complete |
-| **BTLO** | Steganography | [Squid Game Steg](./Digital-Forensics/digital-forensics-labs/squid-game-steg/) | 📂 [Перейти](./Digital-Forensics/digital-forensics-labs/squid-game-steg/) | 🔄 В процессе |
-| **BTLO** | Log Analysis | [Compromised WordPress](./Digital-Forensics/digital-forensics-labs/Log_Analysis-Compromised_WordPress/) | 📂 [Перейти](./Digital-Forensics/digital-forensics-labs/Log_Analysis-Compromised_WordPress/) | 🔄 В процессе |
-| **BTLO** | Malware Analysis | [Suspicious USB](./Digital-Forensics/digital-forensics-labs/Malware_Analysis-Suspicious_USB/) | 📂 [Перейти](./Digital-Forensics/digital-forensics-labs/Malware_Analysis-Suspicious_USB/) | 🔄 В процессе |
-| **BTLO** | Forensics Tools | [Barcode World Reader](./Digital-Forensics/digital-forensics-labs/barcode-world-reader/) | 📂 [Перейти](./Digital-Forensics/digital-forensics-labs/barcode-world-reader/) | 🔄 В процессе |
+| **BTLO** | Steganography | [Squid Game Steg](./Digital-Forensics/digital-forensics-labs/squid-game-steg/) | 📂 [Перейти к материалам](./Digital-Forensics/digital-forensics-labs/squid-game-steg/) | ✅ Complete |
+| **BTLO** | Log Analysis | [Compromised WordPress](./Digital-Forensics/digital-forensics-labs/Log_Analysis-Compromised_WordPress/) | 📂 [Перейти к материалам](./Digital-Forensics/digital-forensics-labs/Log_Analysis-Compromised_WordPress/) | ✅ Complete |
+| **BTLO** | Malware Analysis | [Suspicious USB](./Digital-Forensics/digital-forensics-labs/Malware_Analysis-Suspicious_USB/) | 📂 [Перейти к материалам](./Digital-Forensics/digital-forensics-labs/Malware_Analysis-Suspicious_USB/) | ✅ Complete |
+| **BTLO** | Forensics Tools | [Barcode World Reader](./Digital-Forensics/digital-forensics-labs/barcode-world-reader/) | 📂 [Перейти к материалам](./Digital-Forensics/digital-forensics-labs/barcode-world-reader/) | ✅ Complete |
 
 ### ⚙️ Reverse Engineering (Реверс-Инжиниринг)
 | Платформа | Категория | Название работы | Отчет (Writeup) | Статус |
