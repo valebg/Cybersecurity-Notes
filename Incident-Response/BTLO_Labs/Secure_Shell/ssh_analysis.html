@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTLO - Secure Shell Writeup</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #7f8c8d;
+            --accent: #2980b9;
+            --accent-success: #27ae60;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+            --border-color: #e2e8f0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: var(--accent);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h3 {
+            font-size: 16px;
+            color: #34495e;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin: 0 0 15px 0;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .meta-box {
+            background-color: #ebf5fb;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 14px;
+            margin: 10px 0 15px 0;
+        }
+
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            background-color: #f1f2f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #e74c3c;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            color: inherit;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .status-badge {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        ul {
+            margin: 0 0 20px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🛡️ Blue Team Labs Online - Secure Shell (Writeup)</h1>
+    
+    <div class="meta-box">
+        <strong>Ссылка на достижение:</strong> 
+        <a href="https://blueteamlabs.online/achievement/share/challenge/164988/17" target="_blank">BTLO Achievement Profile</a>
+    </div>
+
+    <h2>📝 Описание сценария</h2>
+    <p>В системе с запущенной службой SSH было замечено аномальное увеличение размера лог-файла. Как выяснилось, это был санкционированный тест на проникновение, проведенный дочерью одного из ИТ-специалистов. Цель данного расследования (Incident Response) — проанализировать артефакты лога <code>sshlog.log</code>, определить вектор атаки, скомпрометированные учетные записи и таймштампы активности.</p>
+
+    <h2>🔍 Ход расследования и использованные команды</h2>
+
+    <h3>1. Первичный анализ структуры лога</h3>
+    <p>Для понимания формата записей и определения используемой операционной системы была выполнена команда:</p>
+    <pre><code>head -n 20 sshlog.log</code></pre>
+    <p>Вывод команды указал на инициализацию процесса <code>C:\OpenSSH-Win64\sshd.exe</code> и наличие отладочных сообщений уровня <code>debug3</code>, что позволило определить ОС (Windows) и уровень логирования.</p>
+
+    <h3>2. Определение источника и типа атаки</h3>
+    <p>Для выявления IP-адреса атакующего и характера его подключений был проведен поиск по событиям аутентификации:</p>
+    <pre><code>grep -i "connection from" sshlog.log | head -n 20</code></pre>
+    <p>Был зафиксирован IP-адрес <code>192.168.1.17</code>, принадлежащий к диапазону частных подсетей, что указывает на внутренний вектор атаки.</p>
+
+    <h3>3. Поиск скомпрометированных учетных записей</h3>
+    <p>Для поиска успешно подобранных паролей использовалась фильтрация по ключевому слову <code>Accepted</code> в связке с IP-адресом источника:</p>
+    <pre><code>grep "Accepted" sshlog.log | grep "192.168.1.17"</code></pre>
+    <p>Команда вернула две строки с успешным входом для учетной записи <code>sophia</code>.</p>
+
+    <h3>4. Определение временных рамок инцидента</h3>
+    <p>Для фиксации самого первого запроса злоумышленника была выведена начальная активность данного IP-адреса:</p>
+    <pre><code>grep "192.168.1.17" sshlog.log | head -n 5</code></pre>
+
+    <h2>🎯 Ответы на вопросы лабораторной работы</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50px;">#</th>
+                <th>Вопрос</th>
+                <th>Ответ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1</strong></td>
+                <td>Is it an internal or external attack, what is the attacker IP?</td>
+                <td><code>internal, 192.168.1.17</code></td>
+            </tr>
+            <tr>
+                <td><strong>2</strong></td>
+                <td>How many valid accounts did the attacker find, and what are the usernames?</td>
+                <td><code>1, sophia</code></td>
+            </tr>
+            <tr>
+                <td><strong>3</strong></td>
+                <td>How many times did the attacker login to these accounts?</td>
+                <td><code>2</code></td>
+            </tr>
+            <tr>
+                <td><strong>4</strong></td>
+                <td>When was the first request from the attacker recorded?</td>
+                <td><code>2021-04-29 23:41:56</code></td>
+            </tr>
+            <tr>
+                <td><strong>5</strong></td>
+                <td>What is the log level for the log file?</td>
+                <td><code>DEBUG3</code></td>
+            </tr>
+            <tr>
+                <td><strong>6</strong></td>
+                <td>Where is the log file located in Windows?</td>
+                <td><code>C:\ProgramData\ssh\logs\sshd.log</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🛠️ Заключение и выводы (Lessons Learned)</h2>
+    <ul>
+        <li><strong>Избыточное логирование:</strong> Уровень <code>DEBUG3</code> производит огромное количество избыточной информации в продуктивной среде, что быстро забивает дисковое пространство. Рекомендуется перевести <code>LogLevel</code> в режим <code>INFO</code>.</li>
+        <li><strong>Контроль учетных записей:</strong> Учетная запись пользователя <code>sophia</code> была скомпрометирована методом перебора (брутфорс). Необходимо внедрить политику сложных паролей и ограничить количество неудачных попыток входа (например, с помощью политик блокировки учетных записей в Windows).</li>
+    </ul>
+</div>
+
+</body>
+</html>
