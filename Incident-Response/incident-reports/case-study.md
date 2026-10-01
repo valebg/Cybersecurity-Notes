@@ -1,1 +1,68 @@
-Incident Analysis: Web Fraud & Deceptive Subscription Scheme1. Executive Summary & ScopeThis repository documents a real-world investigation into an online deceptive billing incident (dark patterns checkout flow). The analysis highlights a practical workflow from a consumer/analyst perspective—demonstrating how standard, non-enterprise tools available to an individual can be leveraged to preserve digital evidence, analyze web traffic, and extract Indicators of Compromise (IoCs).2. Analyst Perspective & Boundaries (Consumer vs. Enterprise SOC)When investigating security incidents outside of a corporate environment, analysts face specific operational boundaries:What a standard user/analyst CAN do:Export client-side network artifacts (HAR files, browser logs).Inspect HTTP request headers, POST payloads, and redirect chains.Document the incident timeline and preserve raw evidence (screenshots, source URLs).Map behaviors critically against standard frameworks (e.g., MITRE ATT&CK) without over-attributing advanced techniques.What is restricted/out of reach:Access to server-side backend logs, WAF (Web Application Firewall) logs, or infrastructure telemetry of the target domain.Active scanning or penetration testing against third-party servers (to avoid legal boundaries).3. Toolkit Used (Client-Side & Open Source)To conduct this analysis without specialized enterprise software, the following standard tools and formats were utilized:Browser Developer Tools (DevTools): Network tab inspection for real-time monitoring of POST requests, cookies, and JavaScript calls.HAR (HTTP Archive) Exporter: Saving complete session interaction data for offline forensic review.Text/Markdown Editors: Structuring the case study, timeline, and documentation.Anonymization Scripts / Manual Redaction: Ensuring zero PII, financial identifiers, or sensitive credentials leaked into the public domain.4. Incident TimelineT0: User accessed the target web application/landing page.T1: Checkout process initiated under obscured subscription terms (Dark Patterns).T2: Transaction POST request submitted via third-party payment gateway.T3: Unauthorized micro-transaction identified via banking notification.T4: Immediate containment action executed (payment card blocked/revoked).T5: Evidence preservation (HAR capture, UI screenshots, domain profiling).T6: Formal incident report and banking dispute initiated.5. MITRE ATT&CK Behavioral MappingStrictly mapped only where evidence directly supports the definition:TechniqueIDEvidence / ObservationConfidencePhishing for InformationT1598Deceptive interface design aimed at eliciting payment authorization without clear consent.MediumSpearphishing LinkT1598.003Not observed (No external malicious link vector identified; direct web navigation).Not observedDrive-by CompromiseT1189Not observed (No browser exploitation or malicious payload execution).Not observed6. Indicators of Interest & IoCs (Anonymized)Suspicious Domain: [REDACTED-GATEWAY].comTarget Merchant Descriptor: [REDACTED-MERCHANT]Transaction Amount: $2.99\text{ EUR}$ (Recurring billing interval)Observed Vector: UI-based subscription obfuscation7. Lessons Learned & RecommendationsAlways Capture Client-Side Artifacts: Preserving HAR files immediately during unexpected web interactions prevents the loss of transient session data.Avoid Framework Over-Attribution: In threat intelligence, accurately labeling unconfirmed behaviors as "Not observed" is as critical as identifying real ones.Proactive Defense: Utilize virtual or disposable single-use cards for web services with ambiguous billing structures.All sensitive personal data, financial identifiers, and tracking tokens have been permanently redacted.
+# Incident Analysis: Web Fraud & Deceptive Subscription Scheme
+
+## 1. Executive Summary & Scope
+This repository documents a real-world investigation into an online deceptive billing incident (dark patterns checkout flow). The analysis highlights a practical workflow from a consumer/analyst perspective—demonstrating how standard, non-enterprise tools available to an individual can be leveraged to preserve digital evidence, analyze web traffic, and extract Indicators of Compromise (IoCs).
+
+---
+
+## 2. Analyst Perspective & Boundaries (Consumer vs. Enterprise SOC)
+When investigating security incidents outside of a corporate environment, analysts face specific operational boundaries:
+
+* **What a standard user/analyst CAN do:**
+* Export client-side network artifacts (HAR files, browser logs).
+* Inspect HTTP request headers, POST payloads, and redirect chains.
+* Document the incident timeline and preserve raw evidence (screenshots, source URLs).
+* Map behaviors critically against standard frameworks (e.g., MITRE ATT&CK) without over-attributing advanced techniques.
+
+* **What is restricted/out of reach:**
+* Access to server-side backend logs, WAF (Web Application Firewall) logs, or infrastructure telemetry of the target domain.
+* Active scanning or penetration testing against third-party servers (to avoid legal boundaries).
+
+---
+
+## 3. Toolkit Used (Client-Side & Open Source)
+To conduct this analysis without specialized enterprise software, the following standard tools and formats were utilized:
+
+* **Browser Developer Tools (DevTools):** Network tab inspection for real-time monitoring of POST requests, cookies, and JavaScript calls.
+* **HAR (HTTP Archive) Exporter:** Saving complete session interaction data for offline forensic review.
+* **Text/Markdown Editors:** Structuring the case study, timeline, and documentation.
+* **Anonymization Scripts / Manual Redaction:** Ensuring zero PII, financial identifiers, or sensitive credentials leaked into the public domain.
+
+---
+
+## 4. Incident Timeline
+* **T0:** User accessed the target web application/landing page.
+* **T1:** Checkout process initiated under obscured subscription terms (Dark Patterns).
+* **T2:** Transaction POST request submitted via third-party payment gateway.
+* **T3:** Unauthorized micro-transaction identified via banking notification.
+* **T4:** Immediate containment action executed (payment card blocked/revoked).
+* **T5:** Evidence preservation (HAR capture, UI screenshots, domain profiling).
+* **T6:** Formal incident report and banking dispute initiated.
+
+---
+
+## 5. MITRE ATT&CK Behavioral Mapping
+*Strictly mapped only where evidence directly supports the definition:*
+
+| Technique | ID | Evidence / Observation | Confidence |
+| :--- | :--- | :--- | :--- |
+| **Phishing for Information** | T1598 | Deceptive interface design aimed at eliciting payment authorization without clear consent. | Medium |
+| **Spearphishing Link** | T1598.003 | *Not observed* (No external malicious link vector identified; direct web navigation). | Not observed |
+| **Drive-by Compromise** | T1189 | *Not observed* (No browser exploitation or malicious payload execution). | Not observed |
+
+---
+
+## 6. Indicators of Interest & IoCs (Anonymized)
+* **Suspicious Domain:** `[REDACTED-GATEWAY].com`
+* **Target Merchant Descriptor:** `[REDACTED-MERCHANT]`
+* **Transaction Amount:** $2.99\text{ EUR}$ (Recurring billing interval)
+* **Observed Vector:** UI-based subscription obfuscation
+
+---
+
+## 7. Lessons Learned & Recommendations
+1. **Always Capture Client-Side Artifacts:** Preserving HAR files immediately during unexpected web interactions prevents the loss of transient session data.
+2. **Avoid Framework Over-Attribution:** In threat intelligence, accurately labeling unconfirmed behaviors as "Not observed" is as critical as identifying real ones.
+3. **Proactive Defense:** Utilize virtual or disposable single-use cards for web services with ambiguous billing structures.
+
+*All sensitive personal data, financial identifiers, and tracking tokens have been permanently redacted.*
